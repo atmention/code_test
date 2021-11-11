@@ -31,7 +31,7 @@ let currentQuestion = 0;
 let qTitle = document.querySelector("#question-title");
 let qContainer = document.querySelector("#container");
 let rSpan = document.querySelector("#result");
-let e;
+const containerEl = document.querySelector("#container");
 
 function displayQuestion(currentQuestion) {
 
@@ -70,7 +70,10 @@ function playQuiz(event) {
         timeLeft = timeLeft - 10;
     }
     currentQuestion++; 
-    displayQuestion(currentQuestion);
+    if (currentQuestion < questions.length) {
+        displayQuestion(currentQuestion);
+    }
+    
 
 }
 
@@ -80,12 +83,24 @@ function countDown() {
     console.log(timeLeft);
 
     if (timeLeft === 0 || timeLeft < 0 || questions.length === currentQuestion) {
+        
+        let qh2 = document.getElementById("question-title");
+        let oul = document.getElementById("question-options");
+        qh2.remove();
+        oul.remove();
+        clearInterval(intervalId);
+        const newTitle = document.createElement('h2');
+        newTitle.textContent = "Quiz Over";
+        const newText = document.createElement('p');
+        newText.textContent = `Your final score is ${timeLeft}.`;
+        containerEl.prepend(newText);
+        containerEl.prepend(newTitle);
+
         // save the score
-        localStorage.setItem("score", timeLeft);
-        window.location.href = 'hs.html';
+        // localStorage.setItem("score", timeLeft);
+        // window.location.href = 'hs.html';
     }
 }
-
-setInterval(countDown, 1000);
+let intervalId = setInterval(countDown, 1000);
 
 displayQuestion(currentQuestion);
