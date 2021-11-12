@@ -96,7 +96,7 @@ function countDown() {
         containerEl.prepend(newText);
         containerEl.prepend(newTitle);
 
-        // save the score
+        // save the  high score
         // localStorage.setItem("score", timeLeft);
         // window.location.href = 'hs.html';
     }
