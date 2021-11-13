@@ -47,7 +47,6 @@ function displayQuestion(currentQuestion) {
         // Display each possible answer to the displayed question
         qContainer.children[1].children[i].innerHTML = `${i+1}. ${questions[currentQuestion].options[i]}`;
         qContainer.children[1].children[i].dataset.answer = false;
-        console.log(qContainer.children[1].children[i]);
         // If the current option is the correct answer, set data value to true
         if (i === questions[currentQuestion].answer) {
             qContainer.children[1].children[i].dataset.answer = true;
@@ -87,7 +86,6 @@ function playQuiz(event) {
 function countDown() {
     timeLeft--;
     timerSpan.innerHTML = timeLeft;
-    console.log(timeLeft);
 
     if (timeLeft === 0 || timeLeft < 0 || questions.length === currentQuestion) {
 

@@ -27,7 +27,3 @@ for (var i = 0; i < highScores.length; i++) {
         .addClass('highscore-item');
     highscoresEl.append(highScoresItem);
 }
-
-console.log(highScores);
-console.log(backBtn);
-console.log(clearBtn);
