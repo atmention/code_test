@@ -134,17 +134,15 @@ function countDown() {
 let intervalId = setInterval(countDown, 1000);
 
 function submitScore() {
-    // grab any existing localStorage data for scores
-    let oldScore = localStorage.getItem('userScore');
+    // grab any existing localStorage data for scores, or an empty array if it is null
+    let highScores = JSON.parse(localStorage.getItem("highScores") || "[]");
 
-    if(oldScore !== null) { // check if there are no scores
-        // since there is an existing score, add to it
-        let newUserScore = [JSON.parse(localStorage.getItem('userScore')), JSON.stringify(userScore)];
-        localStorage.setItem('userScore', newUserScore);
-    } else {
-        // since there is no existing score, set a new value for it
-        localStorage.setItem('userScore', [userScore]);
-    }
+    // add the new score
+    highScores.push(userScore);
+
+    // set the local storage to include the new score
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+
     window.location.href = 'hs.html';
 }
 
