@@ -8,6 +8,11 @@
     user-select: none;
 }
 
+input {
+    width: 150px;
+    margin-right: 10px;
+}
+
 .page-header {
     display: flex;
     width: 100%;

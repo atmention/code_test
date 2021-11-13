@@ -24,13 +24,15 @@ const questions = [{
         answer: 3,
     },
 ]
+
 let timeLeft = 90;
-let timerSpan = document.querySelector("#timer");
-timerSpan.innerHTML = timeLeft;
 let currentQuestion = 0;
-let qTitle = document.querySelector("#question-title");
-let qContainer = document.querySelector("#container");
-let rSpan = document.querySelector("#result");
+
+const timerSpan = document.querySelector("#timer");
+timerSpan.innerHTML = timeLeft;
+const qTitle = document.querySelector("#question-title");
+const qContainer = document.querySelector("#container");
+const rSpan = document.querySelector("#result");
 const containerEl = document.querySelector("#container");
 
 function displayQuestion(currentQuestion) {
@@ -53,11 +55,12 @@ function displayQuestion(currentQuestion) {
 }
 
 // Listen for click on an answer
-const answers = document.getElementsByTagName("li"); // TODO refactor 
+const answersEl = $("#question-options");
 
-for (let ans of answers) {
-    ans.addEventListener("click", playQuiz);
-}
+// Refactor: Add event listener to parent <ul> instead of individual <li>'s
+answersEl.on('click', '.option', function (event) {
+    playQuiz(event);
+});
 
 function playQuiz(event) {
 
@@ -69,11 +72,12 @@ function playQuiz(event) {
         rSpan.innerHTML = "Wrong!";
         timeLeft = timeLeft - 10;
     }
-    currentQuestion++; 
+    currentQuestion++;
     if (currentQuestion < questions.length) {
         displayQuestion(currentQuestion);
+    } else {
+        countDown();
     }
-    
 
 }
 
@@ -83,7 +87,7 @@ function countDown() {
     console.log(timeLeft);
 
     if (timeLeft === 0 || timeLeft < 0 || questions.length === currentQuestion) {
-        
+
         let qh2 = document.getElementById("question-title");
         let oul = document.getElementById("question-options");
         qh2.remove();
@@ -93,14 +97,35 @@ function countDown() {
         newTitle.textContent = "Quiz Over";
         const newText = document.createElement('p');
         newText.textContent = `Your final score is ${timeLeft}.`;
+        const inputLabel = document.createElement('label', {
+            for: 'Initials'
+        });
+        inputLabel.textContent = "Initials: ";
+        const inputBox = document.createElement('input', {
+            type: 'text',
+            name: 'Initials'
+        });
+        const submitButton = document.createElement('button', {
+            type: 'button',
+            class: 'submit-button'
+        });
+        submitButton.textContent = "Submit";
+
+        containerEl.prepend(submitButton);
+        containerEl.prepend(inputBox);
+        containerEl.prepend(inputLabel);
         containerEl.prepend(newText);
         containerEl.prepend(newTitle);
 
-        // save the  high score
-        // localStorage.setItem("score", timeLeft);
-        // window.location.href = 'hs.html';
+        submitButton.addEventListener('click', submitScore);
+
     }
 }
 let intervalId = setInterval(countDown, 1000);
+
+function submitScore() {
+    localStorage.setItem("score", timeLeft);
+    window.location.href = 'hs.html';
+}
 
 displayQuestion(currentQuestion);

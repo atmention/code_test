@@ -1,2 +1,4 @@
-//high scores js file
-console.log(localStorage.getItem("score"));
+// high scores js file
+document.addEventListener("DOMContentLoaded", function(event) {
+    console.log(localStorage.getItem("score"));
+});
