@@ -27,13 +27,14 @@ const questions = [{
 
 let timeLeft = 90;
 let currentQuestion = 0;
+let userScore = {};
 
 const timerSpan = document.querySelector("#timer");
 timerSpan.innerHTML = timeLeft;
 const qTitle = document.querySelector("#question-title");
 const qContainer = document.querySelector("#container");
 const rSpan = document.querySelector("#result");
-const containerEl = document.querySelector("#container");
+const containerEl = $("#container");
 
 function displayQuestion(currentQuestion) {
 
@@ -73,9 +74,11 @@ function playQuiz(event) {
         timeLeft = timeLeft - 10;
     }
     currentQuestion++;
+    // check if we've reached the end of the list of questions,
+    // if not, display the next question in the list
     if (currentQuestion < questions.length) {
         displayQuestion(currentQuestion);
-    } else {
+    } else { // Immediately call countDown since the quiz is over
         countDown();
     }
 
@@ -97,19 +100,19 @@ function countDown() {
         newTitle.textContent = "Quiz Over";
         const newText = document.createElement('p');
         newText.textContent = `Your final score is ${timeLeft}.`;
-        const inputLabel = document.createElement('label', {
-            for: 'Initials'
-        });
-        inputLabel.textContent = "Initials: ";
-        const inputBox = document.createElement('input', {
-            type: 'text',
-            name: 'Initials'
-        });
-        const submitButton = document.createElement('button', {
-            type: 'button',
-            class: 'submit-button'
-        });
-        submitButton.textContent = "Submit";
+
+        const inputLabel = $('<label>')
+            .attr('for', 'Initials')
+            .text("Initials: ");
+
+        const inputBox = $('<input>')
+            .attr('type', 'text')
+            .attr('name', 'Initials');
+
+        const submitButton = $('<button>')
+            .attr('type', 'button')
+            .addClass('submit-button')
+            .text("Submit");
 
         containerEl.prepend(submitButton);
         containerEl.prepend(inputBox);
@@ -117,14 +120,31 @@ function countDown() {
         containerEl.prepend(newText);
         containerEl.prepend(newTitle);
 
-        submitButton.addEventListener('click', submitScore);
+        submitButton.on('click', function () {
+            let userInitials = $('input[name=Initials]').val();
+            userScore = {
+                'initials': userInitials,
+                'score': timeLeft
+            };
+            submitScore();
+        });
 
     }
 }
 let intervalId = setInterval(countDown, 1000);
 
 function submitScore() {
-    localStorage.setItem("score", timeLeft);
+    // grab any existing localStorage data for scores
+    let oldScore = localStorage.getItem('userScore');
+
+    if(oldScore !== null) { // check if there are no scores
+        // since there is an existing score, add to it
+        let newUserScore = [JSON.parse(localStorage.getItem('userScore')), JSON.stringify(userScore)];
+        localStorage.setItem('userScore', newUserScore);
+    } else {
+        // since there is no existing score, set a new value for it
+        localStorage.setItem('userScore', [userScore]);
+    }
     window.location.href = 'hs.html';
 }
 
