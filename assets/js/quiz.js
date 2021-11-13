@@ -1,28 +1,28 @@
 const questions = [{
-    question: 'How many points for a tech fall in Greco:',
-    options: ['15', '10', '8', '25'],
-    answer: 3,
-}, {
+        question: 'How many points for a tech fall in Greco:',
+        options: ['15', '10', '8', '25'],
+        answer: 2,
+    }, {
 
-    question: 'Highest percentage takedown finishes in the NCAA:',
-    options: ['Double leg', 'Single leg', 'Suplex', 'Headlock'],
-    answer: 2,
-},
-{
-    question: 'What is PA wrestling known for:',
-    options: ['Mat wrestling', 'Takedowns', 'Freestyle', 'Greco'],
-    answer: 1,
-},
-{
-    question: 'Best current Team USA wrestler:',
-    options: ['Jordan Burroughs', 'Adaline Gray', 'Kyle Dake', 'Spencer Lee'],
-    answer: 1,
-},
-{
-    question: '2021 Hodge Trophy winner:',
-    options: ['Gable Steveson', 'Mosha Schwartz', 'Mr. Fasttwitch', 'Spencer Lee'],
-    answer: 4,
-},
+        question: 'Highest percentage takedown finishes in the NCAA:',
+        options: ['Double leg', 'Single leg', 'Suplex', 'Headlock'],
+        answer: 1,
+    },
+    {
+        question: 'What is PA wrestling known for:',
+        options: ['Mat wrestling', 'Takedowns', 'Freestyle', 'Greco'],
+        answer: 0,
+    },
+    {
+        question: 'Best current Team USA wrestler:',
+        options: ['Jordan Burroughs', 'Adaline Gray', 'Kyle Dake', 'Spencer Lee'],
+        answer: 0,
+    },
+    {
+        question: '2021 Hodge Trophy winner:',
+        options: ['Gable Steveson', 'Mosha Schwartz', 'Mr. Fasttwitch', 'Spencer Lee'],
+        answer: 3,
+    },
 ]
 let timeLeft = 90;
 let timerSpan = document.querySelector("#timer");
@@ -31,50 +31,76 @@ let currentQuestion = 0;
 let qTitle = document.querySelector("#question-title");
 let qContainer = document.querySelector("#container");
 let rSpan = document.querySelector("#result");
-let e;
+const containerEl = document.querySelector("#container");
 
-// Insert the question into the header
-qTitle.innerHTML = questions[currentQuestion].question;
+function displayQuestion(currentQuestion) {
 
-// Add possible answers to the buttons
-for (let i = 0; i < questions[currentQuestion].options.length; i++) {
+    // Insert the question into the header
+    qTitle.innerHTML = questions[currentQuestion].question;
 
-    // Display each possible answer to the displayed question
-    qContainer.children[1].children[i].innerHTML = `${i+1}. ${questions[currentQuestion].options[i]}`;
-    
-    // If the current option is the correct answer, set data value to true
-    if (i + 1 === questions[currentQuestion].answer) {
-        qContainer.children[1].children[i+1].dataset.answer = true;
+    // Add possible answers to the buttons
+    for (let i = 0; i < questions[currentQuestion].options.length; i++) {
+
+        // Display each possible answer to the displayed question
+        qContainer.children[1].children[i].innerHTML = `${i+1}. ${questions[currentQuestion].options[i]}`;
+        qContainer.children[1].children[i].dataset.answer = false;
+        console.log(qContainer.children[1].children[i]);
+        // If the current option is the correct answer, set data value to true
+        if (i === questions[currentQuestion].answer) {
+            qContainer.children[1].children[i].dataset.answer = true;
+        }
     }
 }
 
 // Listen for click on an answer
-const answers = document.getElementsByTagName("li");
+const answers = document.getElementsByTagName("li"); // TODO refactor 
 
 for (let ans of answers) {
     ans.addEventListener("click", playQuiz);
 }
 
-function playQuiz(event){
+function playQuiz(event) {
 
     // Check if the option clicked is the correct answer,
     // if so - display "Correct!" and move to the next question.
     if (event.target.dataset.answer === "true") {
         rSpan.innerHTML = "Correct!";
-    }
-    else {
+    } else {
         rSpan.innerHTML = "Wrong!";
+        timeLeft = timeLeft - 10;
     }
+    currentQuestion++; 
+    if (currentQuestion < questions.length) {
+        displayQuestion(currentQuestion);
+    }
+    
+
 }
 
-// function countDown() {
-//     timeLeft--;
-//     timerSpan.innerHTML = timeLeft;
-//     console.log(timeLeft);
+function countDown() {
+    timeLeft--;
+    timerSpan.innerHTML = timeLeft;
+    console.log(timeLeft);
 
-//     if (timeLeft === 0 || timeLeft < 0) {
-//         window.location.href = 'hs.html';
-//     }
-// }
+    if (timeLeft === 0 || timeLeft < 0 || questions.length === currentQuestion) {
+        
+        let qh2 = document.getElementById("question-title");
+        let oul = document.getElementById("question-options");
+        qh2.remove();
+        oul.remove();
+        clearInterval(intervalId);
+        const newTitle = document.createElement('h2');
+        newTitle.textContent = "Quiz Over";
+        const newText = document.createElement('p');
+        newText.textContent = `Your final score is ${timeLeft}.`;
+        containerEl.prepend(newText);
+        containerEl.prepend(newTitle);
 
-// setInterval(countDown, 1000);
+        // save the  high score
+        // localStorage.setItem("score", timeLeft);
+        // window.location.href = 'hs.html';
+    }
+}
+let intervalId = setInterval(countDown, 1000);
+
+displayQuestion(currentQuestion);

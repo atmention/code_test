@@ -17,7 +17,7 @@
     align-items: center;
 }
 
-.wrapper {
+#wrapper {
     display: flex;
     justify-content: space-around;
 }
@@ -61,7 +61,7 @@ li:hover {
     cursor: pointer;
 }
 
-.container {
+#container {
     width: 450px;
     text-align: center;
 }
