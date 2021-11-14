@@ -46,7 +46,8 @@ ul {
     padding: none;
 }
 
-li, button {
+li,
+button {
     width: fit-content;
     padding: 0.3em 0.75em;
     margin: 0 0.1em 0.1em 0;
@@ -62,9 +63,11 @@ li, button {
     transition: all 0.2s;
 }
 
-li:hover, button:hover {
+li:hover,
+button:hover {
     border-color: rgba(0, 0, 5, 1);
     cursor: pointer;
+    color: rgba(0, 0, 5, 1);
 }
 
 #highscores-list li {
