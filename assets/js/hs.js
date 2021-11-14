@@ -3,8 +3,8 @@ const highscoresEl = $('#highscores-list');
 const clearBtn = $('#clear-btn');
 const backBtn = $('#back-btn');
 
-clearBtn.on('click', function() {
-    $('li').each(function() {
+clearBtn.on('click', function () {
+    $('li').each(function () {
         $(this).remove();
     });
     localStorage.setItem("highScores", "[]");
@@ -17,7 +17,7 @@ backBtn.on('click', function () {
 const highScores = JSON.parse(localStorage.getItem("highScores"));
 
 // sort the array of highScores
-highScores.sort(function(a, b) {
+highScores.sort(function (a, b) {
     return b.score - a.score;
 });
 
