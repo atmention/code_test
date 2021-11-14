@@ -53,8 +53,8 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://atmention.github.io/code_test/)
 
-Wrestling knowledge tests! 
-This is a multiple choice test of your wrestling knowledge. 
+Keep tabs on my commit history to see the changes made across time.
+Expect to see new versions and projects!
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
