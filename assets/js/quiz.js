@@ -82,7 +82,7 @@ function playQuiz(event) {
     }
 
 }
-
+// Some cool stuff happens here
 function countDown() {
     timeLeft--;
     timerSpan.innerHTML = timeLeft;
