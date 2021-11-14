@@ -30,7 +30,7 @@
 <br />
 <div align="center">
   <a href="https://atmention.github.io/code_test/">
-    <img src="Assets/images/logo.png" alt="Logo" width="80" height="80">
+    <img src="assets/images/logo.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center">Wrestling Test</h3>
