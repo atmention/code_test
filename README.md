@@ -36,7 +36,7 @@
 <h3 align="center">Wrestling Test</h3>
 
   <p align="center">
-    Wrestling Test
+    Test your wrestling knowledge 
     <br />
     <a href="https://atmention.github.io/code_test/">View Demo</a>
     ·
@@ -54,7 +54,7 @@
 [![Product Name Screen Shot][product-screenshot]](https://atmention.github.io/code_test/)
 
 Wrestling knowledge tests! 
-Best of luck to you!!
+This is a multiple choice test of your wrestling knowledge. 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -82,6 +82,6 @@ Best of luck to you!!
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/tim-carrier-9a2a9a22/
 [linkedin-url-ben]: https://www.linkedin.com/in/bk09/
-[product-screenshot]: Assets/images/screenshot.png
+[product-screenshot]: assets/images/screenshot.png
 
 
