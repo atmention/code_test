@@ -11,6 +11,9 @@
 input {
     width: 150px;
     margin-right: 10px;
+    user-select: all;
+    -moz-user-select: all;
+    -ms-user-select: text;
 }
 
 .page-header {
