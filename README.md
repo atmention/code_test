@@ -82,6 +82,6 @@ Expect to see new versions and projects!
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/tim-carrier-9a2a9a22/
 [linkedin-url-ben]: https://www.linkedin.com/in/bk09/
-[product-screenshot]: assets/images/logo.png
+[product-screenshot]: assets/images/comSUM281m.gif
 
 
